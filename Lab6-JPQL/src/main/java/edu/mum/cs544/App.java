@@ -23,8 +23,8 @@ public class App {
 
         // a) TODO: Flights leaving USA capacity > 500
         System.out.println("Question A:");
-        List<Flight> flights = em.createQuery("select f from Flight as f join f.airplane as a " +
-                "where a.capacity > 500", Flight.class).getResultList();
+        List<Flight> flights = em.createQuery("select f from Flight as f join f.origin as o join f.airplane as a " +
+                "where o.country = 'USA' and a.capacity > 500", Flight.class).getResultList();
         System.out.printf("%-9s%-31s%-31s\n", "Flight:", "Departs:",
                 "Arrives:");
         for (Flight flight : flights) {
@@ -89,7 +89,7 @@ public class App {
         Date date = Date.valueOf("2009-08-07");
         Time time = Time.valueOf("12:00:00");
         TypedQuery<Flight> query = em.createQuery("select f from Flight as f " +
-                "where f.departureDate < :date or (f.departureDate = :date and f.departureTime < :time)", Flight.class);
+                "where f.departureDate = :date and f.departureTime < :time", Flight.class);
         query.setParameter("date", date, TemporalType.DATE);
         query.setParameter("time", time, TemporalType.TIME);
         flights = query.getResultList();

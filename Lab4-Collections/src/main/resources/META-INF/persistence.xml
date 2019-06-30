@@ -7,7 +7,7 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <properties>
         <property name="javax.persistence.jdbc.url"
-                  value="jdbc:mysql://localhost:3306/simpsons?useSSL=false"/>
+                  value="jdbc:mysql://localhost:3306/cs544?useSSL=false"/>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         <property name="javax.persistence.jdbc.user" value="root"/>
         <property name="javax.persistence.jdbc.password" value="12345678"/>
@@ -18,7 +18,7 @@
         <property name="hibernate.format_sql" value="true" />
         <property name="hibernate.id.new_generator_mappings" value="false" />
         <property name="javax.persistence.schema-generation.database.action"
-                  value="none"/>
+                  value="drop-and-create"/>
     </properties>
     </persistence-unit>
 </persistence>

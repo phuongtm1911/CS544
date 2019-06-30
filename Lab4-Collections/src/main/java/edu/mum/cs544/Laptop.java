@@ -8,15 +8,14 @@ public class Laptop {
     @GeneratedValue
     private Integer id;
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Employee employee;
 
     public Laptop() {
     }
 
-    public Laptop(String name, Employee employee) {
+    public Laptop(String name) {
         this.name = name;
-        this.employee = employee;
     }
 
     public String getName() {

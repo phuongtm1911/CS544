@@ -10,17 +10,16 @@ public class Flight {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany
-    @JoinColumn(name = "passenger_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "flight_id")
     @OrderColumn(name = "sequence")
     private List<Passenger> passengers = new ArrayList<>();
 
     public Flight() {
     }
 
-    public Flight(String name, List<Passenger> passengers) {
+    public Flight(String name) {
         this.name = name;
-        this.passengers = passengers;
     }
 
     public String getName() {
@@ -35,7 +34,17 @@ public class Flight {
         return passengers;
     }
 
-    public void setPassengers(List<Passenger> passengers) {
-        this.passengers = passengers;
+    public boolean addPassenger(Passenger passenger) {
+        if (passengers.add(passenger)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removePassenger(Passenger passenger) {
+        if (passengers.remove(passenger)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -10,16 +10,16 @@ public class School {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany
-    @MapKey(name = "studentId")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school_id")
+    @MapKeyColumn(name = "studentId")
     private Map<Integer, Student> students = new HashMap<>();
 
     public School() {
     }
 
-    public School(String name, Map<Integer, Student> students) {
+    public School(String name) {
         this.name = name;
-        this.students = students;
     }
 
     public String getName() {
@@ -34,7 +34,17 @@ public class School {
         return students;
     }
 
-    public void setStudents(Map<Integer, Student> students) {
-        this.students = students;
+    public boolean addStudent(Student student) {
+        if (students.put(student.getId(), student) == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeStudent(Student student) {
+        if (students.remove(student.getId(), student)) {
+            return true;
+        }
+        return false;
     }
 }

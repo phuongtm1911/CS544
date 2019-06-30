@@ -1,9 +1,6 @@
 package edu.mum.cs544;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,15 +10,14 @@ public class Employee {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private Set<Laptop> laptops = new HashSet<>();
 
     public Employee() {
     }
 
-    public Employee(String name, Set<Laptop> laptops) {
+    public Employee(String name) {
         this.name = name;
-        this.laptops = laptops;
     }
 
     public String getName() {
@@ -36,7 +32,17 @@ public class Employee {
         return laptops;
     }
 
-    public void setLaptops(Set<Laptop> laptops) {
-        this.laptops = laptops;
+    public void addLaptop(Laptop laptop) {
+        laptops.add(laptop);
+        laptop.setEmployee(this);
+    }
+
+    public boolean removeLaptop(Laptop laptop) {
+        if (laptops.remove(laptop)) {
+            laptop.setEmployee(null);
+            return true;
+        }
+        return false;
+
     }
 }

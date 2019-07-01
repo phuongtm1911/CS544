@@ -1,0 +1,30 @@
+Without optimization, to fetch this data from the database took 34285 milliseconds.
+
+@LazyCollection(LazyCollectionOption.EXTRA)
+1st time: To fetch this data from the database took 24458 milliseconds.
+2nd time: To fetch this data from the database took 26188 milliseconds.
+
+@BatchSize(size=10)
+1st time: To fetch this data from the database took 21102 milliseconds.
+2nd time: To fetch this data from the database took 19755 milliseconds.
+@BatchSize(size=5)
+1st time: To fetch this data from the database took 21362 milliseconds.
+2nd time: To fetch this data from the database took 20369 milliseconds.
+@BatchSize(size=50)
+1st time: To fetch this data from the database took 18495 milliseconds.
+2nd time: To fetch this data from the database took 15466 milliseconds.
+
+@Fetch(FetchMode.SUBSELECT)
+1st time: To fetch this data from the database took 19453 milliseconds.
+2nd time: To fetch this data from the database took 20085 milliseconds.
+
+// Join fetch - from Owner o join fetch o.pets
+1st time: To fetch this data from the database took 20423 milliseconds.
+2nd time: To fetch this data from the database took 18682 milliseconds.
+
+// Entity graph
+1st time: To fetch this data from the database took 17302 milliseconds.
+2nd time: To fetch this data from the database took 16622 milliseconds.
+
+Entity graph is the best strategy 
+
